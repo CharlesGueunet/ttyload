@@ -10,32 +10,32 @@
 
 #include <time.h> /* because we use time_t inside this file */
 
-#define	MIN(a,b)	(((a)<(b))?(a):(b))
-#define	MAX(a,b)	(((a)>(b))?(a):(b))
+#define MIN(a, b) (((a) < (b)) ? (a) : (b))
+#define MAX(a, b) (((a) > (b)) ? (a) : (b))
 
-#define	ONE	01;
-#define	FIVE	02;
-#define	FIFTEEN	04;
+#define ONE 01;
+#define FIVE 02;
+#define FIFTEEN 04;
 
-typedef	long	load_t;
+typedef long load_t;
 
 typedef struct load_list {
-	load_t	one_minute;
-	load_t	five_minute;
-	load_t	fifteen_minute;
-	int	height1;
-	int	height5;
-	int	height15;
-	int	numloads;
-    } load_list;
+  load_t one_minute;
+  load_t five_minute;
+  load_t fifteen_minute;
+  int height1;
+  int height5;
+  int height15;
+  int numloads;
+} load_list;
 
 /* storage for clock display along the bottom */
 typedef struct clock_info {
-	int	pos;
-	char	clock[6];
-        time_t  when;
-    } clock_info;
+  int pos;
+  char clock[6];
+  time_t when;
+} clock_info;
 
 /* functions in arch-specific files: */
-extern	void	getload(load_list *);
-extern	void	gettermsize();
+extern void getload(load_list *);
+extern void gettermsize();

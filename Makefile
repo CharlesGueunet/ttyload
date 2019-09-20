@@ -4,33 +4,33 @@
 
 # change this if you want to use 'make install' and have it go
 # somewhere else:
-INSTALLDIR	= /usr/local/bin
+INSTALLDIR = /usr/local/bin
 
-ARCH	= `uname -s | sed -e 's/ /-/g'`
-LDFLAGS	= `./ldflags`
+ARCH = `uname -s | sed -e 's/ /-/g'`
+LDFLAGS = `./ldflags`
 
-OBJS	=	arch/${ARCH}/getload.o	\
-		arch/${ARCH}/terminfo.o	\
-		${NULL}
+OBJS = arch/${ARCH}/getload.o \
+			 arch/${ARCH}/terminfo.o \
+			 ${NULL}
 
 # this is what I use most places...
 CC=gcc -pedantic -Wall -Werror
 
 # for the things in the sub-directory:
-INCLUDES	=	-I$${PWD:-.} \
-			-I$${PWD:-.}/arch/${ARCH} \
-			-I$${PWD:-.}/arch/default
+INCLUDES = -I$${PWD:-.} \
+	-I$${PWD:-.}/arch/${ARCH} \
+	-I$${PWD:-.}/arch/default
 
 # Debugging compiles?
-DEBUG	= -g
+DEBUG = -g
 
-VERSION	= -DVERSION='"'`cat Version`'"'
+VERSION = -DVERSION='"'`cat Version`'"'
 
-CFLAGS	= $(INCLUDES) $(OTHER_FLAGS) $(DEBUG) $(VERSION)
+CFLAGS = $(INCLUDES) $(OTHER_FLAGS) $(DEBUG) $(VERSION)
 
 # most people won't want loader, so don't bother building it:
-# PROGRAMS =	archbuild loader
-PROGRAMS =	archbuild
+# PROGRAMS = archbuild loader
+PROGRAMS = archbuild
 
 default:	$(PROGRAMS)
 
@@ -38,19 +38,19 @@ test:		$(PROGRAMS)
 	./ttyload -i 1
 
 # which architechtures are just symlinks?
-ARCHLINKS_FREEBSD	=	\
-	arch/Darwin		\
-	arch/Isilon-OneFS	\
-	${NULL}
+ARCHLINKS_FREEBSD = \
+										arch/Darwin  \
+										arch/Isilon-OneFS \
+										${NULL}
 
-ARCHLINKS_THISARCH	=	\
-	arch/thisarch		\
-	${NULL}
+ARCHLINKS_THISARCH = \
+										 arch/thisarch  \
+										 ${NULL}
 
-ARCHLINKS	=		\
-	$(ARCHLINKS_FREEBSD)	\
-	$(ARCHLINKS_THISARCH)	\
-	${NULL}
+ARCHLINKS =  \
+						 $(ARCHLINKS_FREEBSD)	\
+						 $(ARCHLINKS_THISARCH)	\
+						 ${NULL}
 
 # Some architechtures mimic eachother:
 $(ARCHLINKS_FREEBSD):
